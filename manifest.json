@@ -1,0 +1,9 @@
+{
+  "name":"UBCP SECURITY Gestion",
+  "short_name":"UBCP SECURITY",
+  "start_url":"index.html",
+  "display":"standalone",
+  "background_color":"#f4f6f9",
+  "theme_color":"#17365D",
+  "icons":[]
+}

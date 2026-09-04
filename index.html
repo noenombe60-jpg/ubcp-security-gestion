@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#17365D">
+<link rel="manifest" href="manifest.json">
+<title>UBCP SECURITY — Gestion</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f6f9;color:#182230}
+header{background:#17365D;color:#fff;padding:16px;text-align:center;position:sticky;top:0;z-index:5}
+header h1{margin:0;font-size:22px}.container{max-width:1200px;margin:auto;padding:14px}
+.card{background:#fff;border-radius:14px;padding:16px;margin:12px 0;box-shadow:0 2px 12px #0001}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.kpi{padding:18px;border-radius:12px;background:#eaf2f8}.kpi b{display:block;font-size:21px;margin-top:6px}
+nav{display:flex;gap:8px;overflow:auto;padding:10px 0}button{border:0;border-radius:9px;padding:11px 14px;background:#2F75B5;color:#fff;font-weight:700;cursor:pointer}
+button.secondary{background:#6c757d}button.danger{background:#b00020}button:disabled{opacity:.5}
+input,select,textarea{width:100%;padding:11px;margin:6px 0 12px;border:1px solid #ccd3da;border-radius:8px;font-size:15px}
+label{font-weight:700;font-size:13px}.hidden{display:none}.login{max-width:430px;margin:8vh auto}.err{color:#b00020;font-weight:700}.ok{color:#287a35;font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:9px;border-bottom:1px solid #ddd;text-align:left}th{background:#17365D;color:#fff}
+.small{font-size:12px;color:#667}.tag{display:inline-block;padding:5px 8px;border-radius:20px;background:#eaf2f8}
+.formgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.tablewrap{overflow:auto}.topline{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header><h1>UBCP SECURITY</h1><div>Gestion des marchés, agents, paiements & caisse</div></header>
+<div class="container">
+<section id="login" class="card login">
+<h2>Connexion</h2>
+<p class="small">Version 2 — Firebase Authentication + Cloud Firestore.</p>
+<label>Email</label><input id="email" type="email" placeholder="admin@ubcp-security.com">
+<label>Mot de passe</label><input id="password" type="password" placeholder="Mot de passe">
+<button id="loginBtn">Se connecter</button><p id="loginMsg" class="err"></p>
+</section>
+
+<section id="app" class="hidden">
+<nav>
+<button data-page="dash">Tableau de bord</button>
+<button data-page="cash">Caisse</button>
+<button data-page="agents">Agents</button>
+<button data-page="markets">Marchés</button>
+<button data-page="payments">Paiements</button>
+<button data-page="reports">Rapports</button>
+<button id="adminBtn" data-page="admin">Administration</button>
+<button class="secondary" id="logoutBtn">Déconnexion</button>
+</nav>
+
+<div id="dash" class="page">
+<div class="grid">
+<div class="kpi">Entrées <b id="inTotal">0 FC</b></div>
+<div class="kpi">Sorties <b id="outTotal">0 FC</b></div>
+<div class="kpi">Solde <b id="balance">0 FC</b></div>
+<div class="kpi">Agents <b id="agentCount">0</b></div>
+<div class="kpi">Marchés actifs <b id="marketCount">0</b></div>
+</div>
+<div class="card"><div class="topline"><h3>Dernières opérations</h3><span id="roleTag" class="tag"></span></div><div class="tablewrap"><div id="recent"></div></div></div>
+</div>
+
+<div id="cash" class="page hidden">
+<div class="card"><h2>Nouvelle opération de caisse</h2>
+<div class="formgrid">
+<div><label>Type</label><select id="cashType"><option value="entrée">Entrée</option><option value="sortie">Sortie</option></select></div>
+<div><label>Montant (FC)</label><input id="cashAmount" type="number" min="1"></div>
+<div><label>Motif</label><input id="cashReason"></div>
+<div><label>Référence</label><input id="cashRef" placeholder="CAISSE-001"></div>
+</div>
+<label>Observation</label><textarea id="cashNote"></textarea>
+<button id="cashSave">Enregistrer</button><p id="cashMsg"></p>
+</div>
+<div class="card"><h3>Historique caisse</h3><div class="tablewrap"><div id="cashTable"></div></div></div>
+</div>
+
+<div id="agents" class="page hidden">
+<div class="card" id="agentFormCard"><h2>Ajouter un agent</h2>
+<div class="formgrid">
+<input id="agentMatricule" placeholder="Matricule">
+<input id="agentNom" placeholder="Nom">
+<input id="agentPostnom" placeholder="Postnom">
+<input id="agentPrenom" placeholder="Prénom">
+<input id="agentPhone" placeholder="Téléphone">
+<input id="agentFunction" placeholder="Fonction">
+<input id="agentSalary" type="number" min="0" placeholder="Salaire (FC)">
+<select id="agentStatus"><option>Actif</option><option>Inactif</option></select>
+</div><button id="agentSave">Ajouter</button><p id="agentMsg"></p></div>
+<div class="card"><h3>Liste des agents</h3><div class="tablewrap"><div id="agentsTable"></div></div></div>
+</div>
+
+<div id="markets" class="page hidden">
+<div class="card" id="marketFormCard"><h2>Ajouter un marché</h2>
+<div class="formgrid">
+<input id="marketName" placeholder="Nom du marché">
+<input id="marketClient" placeholder="Client">
+<input id="marketSite" placeholder="Site">
+<input id="marketAmount" type="number" min="0" placeholder="Montant contrat (FC)">
+<input id="marketStart" type="date">
+<input id="marketEnd" type="date">
+<select id="marketStatus"><option>Actif</option><option>Terminé</option><option>Suspendu</option></select>
+</div><button id="marketSave">Ajouter</button><p id="marketMsg"></p></div>
+<div class="card"><h3>Marchés</h3><div class="tablewrap"><div id="marketsTable"></div></div></div>
+</div>
+
+<div id="payments" class="page hidden">
+<div class="card"><h2>Paiement d'un agent</h2>
+<div class="formgrid">
+<select id="payAgent"><option value="">Choisir un agent</option></select>
+<input id="payAmount" type="number" min="1" placeholder="Montant (FC)">
+<select id="payType"><option>Salaire</option><option>Avance</option><option>Prime</option><option>Retenue</option></select>
+<input id="payRef" placeholder="Référence paiement">
+</div><label>Observation</label><textarea id="payNote"></textarea>
+<button id="paySave">Enregistrer le paiement</button><p id="payMsg"></p></div>
+<div class="card"><h3>Historique des paiements</h3><div class="tablewrap"><div id="paymentsTable"></div></div></div>
+</div>
+
+<div id="reports" class="page hidden">
+<div class="card"><h2>Rapports / synthèse</h2><div id="reportContent"></div></div>
+</div>
+
+<div id="admin" class="page hidden">
+<div class="card"><h2>Administration</h2>
+<p>Gestion des comptes Firebase et des rôles.</p>
+<p class="small">La création sécurisée des comptes utilisateurs doit être faite depuis Firebase Console ou via une Cloud Function avec privilèges serveur. Le navigateur ne doit jamais contenir la clé Admin SDK.</p>
+<div id="adminInfo"></div>
+</div></div>
+</section>
+</div>
+<script type="module" src="app.js"></script>
+</body></html>
