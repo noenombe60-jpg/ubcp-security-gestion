@@ -1,128 +1,37 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#17365D">
-<link rel="manifest" href="manifest.json">
-<title>UBCP SECURITY — Gestion</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071a52"><meta name="description" content="Universal Business Company Plus – UBCP SARL. Approvisionnement industriel, logistique, équipements techniques et support aux projets miniers et d’infrastructures.">
+<title>UBCP SARL — Universal Business Company Plus</title>
+<link rel="icon" href="assets/ubcp-logo.png">
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f6f9;color:#182230}
-header{background:#17365D;color:#fff;padding:16px;text-align:center;position:sticky;top:0;z-index:5}
-header h1{margin:0;font-size:22px}.container{max-width:1200px;margin:auto;padding:14px}
-.card{background:#fff;border-radius:14px;padding:16px;margin:12px 0;box-shadow:0 2px 12px #0001}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
-.kpi{padding:18px;border-radius:12px;background:#eaf2f8}.kpi b{display:block;font-size:21px;margin-top:6px}
-nav{display:flex;gap:8px;overflow:auto;padding:10px 0}button{border:0;border-radius:9px;padding:11px 14px;background:#2F75B5;color:#fff;font-weight:700;cursor:pointer}
-button.secondary{background:#6c757d}button.danger{background:#b00020}button:disabled{opacity:.5}
-input,select,textarea{width:100%;padding:11px;margin:6px 0 12px;border:1px solid #ccd3da;border-radius:8px;font-size:15px}
-label{font-weight:700;font-size:13px}.hidden{display:none}.login{max-width:430px;margin:8vh auto}.err{color:#b00020;font-weight:700}.ok{color:#287a35;font-weight:700}
-table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:9px;border-bottom:1px solid #ddd;text-align:left}th{background:#17365D;color:#fff}
-.small{font-size:12px;color:#667}.tag{display:inline-block;padding:5px 8px;border-radius:20px;background:#eaf2f8}
-.formgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
-.tablewrap{overflow:auto}.topline{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+:root{--navy:#071a52;--blue:#0b4dcc;--red:#e50914;--gold:#c99a2e;--ink:#101828;--muted:#667085;--bg:#f6f8fc;--white:#fff;--line:#e6eaf0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}.container{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--navy);font-weight:900}.brand img{width:64px;height:52px;object-fit:contain}.brand span{font-size:14px;letter-spacing:.5px}.menu{display:flex;gap:22px;align-items:center}.menu a{color:#344054;text-decoration:none;font-weight:700;font-size:14px}.menu a:hover{color:var(--blue)}.menu .cta{background:var(--navy);color:#fff;padding:10px 15px;border-radius:10px}
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#06133c 0%,#0a2c78 58%,#0b4dcc 100%);color:#fff;padding:92px 0 86px}.hero:after{content:"";position:absolute;right:-140px;top:-140px;width:420px;height:420px;border:80px solid rgba(255,255,255,.06);border-radius:50%}.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:50px;align-items:center;position:relative;z-index:1}.eyebrow{display:inline-block;border:1px solid rgba(255,255,255,.3);padding:7px 11px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase}.hero h1{font-size:clamp(38px,6vw,70px);line-height:1.02;margin:18px 0 18px}.hero h1 span{color:#ff2632}.hero p{font-size:19px;color:#dce6ff;max-width:700px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-block;padding:13px 18px;border-radius:11px;text-decoration:none;font-weight:900}.btn.primary{background:#fff;color:var(--navy)}.btn.outline{border:1px solid rgba(255,255,255,.5);color:#fff}.hero-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:22px;padding:24px;box-shadow:0 20px 50px rgba(0,0,0,.18)}.hero-card img{width:100%;max-width:300px;height:220px;object-fit:contain;display:block;margin:auto}.hero-card h3{margin:8px 0}.hero-card p{font-size:14px;margin:0;color:#dce6ff}
+section{padding:76px 0}.section-head{max-width:760px;margin-bottom:34px}.kicker{color:var(--blue);font-weight:900;text-transform:uppercase;font-size:12px;letter-spacing:1.2px}.section-head h2{font-size:clamp(30px,4vw,44px);margin:8px 0 10px;color:var(--navy);line-height:1.1}.section-head p{color:var(--muted);margin:0}.about{background:#fff}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}.about-card{padding:28px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 10px 35px rgba(16,24,40,.05)}.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}.fact{padding:16px;border-radius:14px;background:var(--bg);font-weight:800;color:var(--navy)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 8px 28px rgba(16,24,40,.05)}.icon{font-size:28px}.card h3{margin:12px 0 7px;color:var(--navy)}.card p{color:var(--muted);font-size:14px;margin:0}.security{background:linear-gradient(180deg,#071a52,#08143a);color:#fff}.security .section-head h2{color:#fff}.security .section-head p{color:#cbd6f2}.security-box{display:grid;grid-template-columns:.75fr 1.25fr;gap:34px;align-items:center}.security-logo{background:#050505;border-radius:24px;padding:20px;text-align:center;border:1px solid #9f7b24}.security-logo img{width:100%;max-width:330px;height:310px;object-fit:contain}.security-content h3{font-size:30px;margin:0 0 8px}.security-content p{color:#cbd6f2}.security-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:22px 0}.security-list div{padding:12px;border:1px solid rgba(255,255,255,.15);border-radius:10px;background:rgba(255,255,255,.05)}
+.contact{background:#fff}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.contact-item{padding:24px;border:1px solid var(--line);border-radius:16px}.contact-item strong{display:block;color:var(--navy);margin-bottom:5px}.contact-item a{color:var(--blue);font-weight:800;text-decoration:none}
+footer{background:#050e29;color:#b9c5df;padding:35px 0}.footer-grid{display:flex;justify-content:space-between;gap:20px;align-items:center}.footer-brand{display:flex;align-items:center;gap:12px;color:#fff;font-weight:900}.footer-brand img{width:58px;height:48px;object-fit:contain}.small{font-size:13px}
+@media(max-width:820px){.menu{display:none}.hero-grid,.about-grid,.security-box,.contact-grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.hero{padding:65px 0}.security-list{grid-template-columns:1fr}.footer-grid{flex-direction:column;align-items:flex-start}}
 </style>
 </head>
 <body>
-<header><h1>UBCP SECURITY</h1><div>Gestion des marchés, agents, paiements & caisse</div></header>
-<div class="container">
-<section id="login" class="card login">
-<h2>Connexion</h2>
-<p class="small">Version 2 — Firebase Authentication + Cloud Firestore.</p>
-<label>Email</label><input id="email" type="email" placeholder="admin@ubcp-security.com">
-<label>Mot de passe</label><input id="password" type="password" placeholder="Mot de passe">
-<button id="loginBtn">Se connecter</button><p id="loginMsg" class="err"></p>
-</section>
-
-<section id="app" class="hidden">
-<nav>
-<button data-page="dash">Tableau de bord</button>
-<button data-page="cash">Caisse</button>
-<button data-page="agents">Agents</button>
-<button data-page="markets">Marchés</button>
-<button data-page="payments">Paiements</button>
-<button data-page="reports">Rapports</button>
-<button id="adminBtn" data-page="admin">Administration</button>
-<button class="secondary" id="logoutBtn">Déconnexion</button>
-</nav>
-
-<div id="dash" class="page">
-<div class="grid">
-<div class="kpi">Entrées <b id="inTotal">0 FC</b></div>
-<div class="kpi">Sorties <b id="outTotal">0 FC</b></div>
-<div class="kpi">Solde <b id="balance">0 FC</b></div>
-<div class="kpi">Agents <b id="agentCount">0</b></div>
-<div class="kpi">Marchés actifs <b id="marketCount">0</b></div>
-</div>
-<div class="card"><div class="topline"><h3>Dernières opérations</h3><span id="roleTag" class="tag"></span></div><div class="tablewrap"><div id="recent"></div></div></div>
-</div>
-
-<div id="cash" class="page hidden">
-<div class="card"><h2>Nouvelle opération de caisse</h2>
-<div class="formgrid">
-<div><label>Type</label><select id="cashType"><option value="entrée">Entrée</option><option value="sortie">Sortie</option></select></div>
-<div><label>Montant (FC)</label><input id="cashAmount" type="number" min="1"></div>
-<div><label>Motif</label><input id="cashReason"></div>
-<div><label>Référence</label><input id="cashRef" placeholder="CAISSE-001"></div>
-</div>
-<label>Observation</label><textarea id="cashNote"></textarea>
-<button id="cashSave">Enregistrer</button><p id="cashMsg"></p>
-</div>
-<div class="card"><h3>Historique caisse</h3><div class="tablewrap"><div id="cashTable"></div></div></div>
-</div>
-
-<div id="agents" class="page hidden">
-<div class="card" id="agentFormCard"><h2>Ajouter un agent</h2>
-<div class="formgrid">
-<input id="agentMatricule" placeholder="Matricule">
-<input id="agentNom" placeholder="Nom">
-<input id="agentPostnom" placeholder="Postnom">
-<input id="agentPrenom" placeholder="Prénom">
-<input id="agentPhone" placeholder="Téléphone">
-<input id="agentFunction" placeholder="Fonction">
-<input id="agentSalary" type="number" min="0" placeholder="Salaire (FC)">
-<select id="agentStatus"><option>Actif</option><option>Inactif</option></select>
-</div><button id="agentSave">Ajouter</button><p id="agentMsg"></p></div>
-<div class="card"><h3>Liste des agents</h3><div class="tablewrap"><div id="agentsTable"></div></div></div>
-</div>
-
-<div id="markets" class="page hidden">
-<div class="card" id="marketFormCard"><h2>Ajouter un marché</h2>
-<div class="formgrid">
-<input id="marketName" placeholder="Nom du marché">
-<input id="marketClient" placeholder="Client">
-<input id="marketSite" placeholder="Site">
-<input id="marketAmount" type="number" min="0" placeholder="Montant contrat (FC)">
-<input id="marketStart" type="date">
-<input id="marketEnd" type="date">
-<select id="marketStatus"><option>Actif</option><option>Terminé</option><option>Suspendu</option></select>
-</div><button id="marketSave">Ajouter</button><p id="marketMsg"></p></div>
-<div class="card"><h3>Marchés</h3><div class="tablewrap"><div id="marketsTable"></div></div></div>
-</div>
-
-<div id="payments" class="page hidden">
-<div class="card"><h2>Paiement d'un agent</h2>
-<div class="formgrid">
-<select id="payAgent"><option value="">Choisir un agent</option></select>
-<input id="payAmount" type="number" min="1" placeholder="Montant (FC)">
-<select id="payType"><option>Salaire</option><option>Avance</option><option>Prime</option><option>Retenue</option></select>
-<input id="payRef" placeholder="Référence paiement">
-</div><label>Observation</label><textarea id="payNote"></textarea>
-<button id="paySave">Enregistrer le paiement</button><p id="payMsg"></p></div>
-<div class="card"><h3>Historique des paiements</h3><div class="tablewrap"><div id="paymentsTable"></div></div></div>
-</div>
-
-<div id="reports" class="page hidden">
-<div class="card"><h2>Rapports / synthèse</h2><div id="reportContent"></div></div>
-</div>
-
-<div id="admin" class="page hidden">
-<div class="card"><h2>Administration</h2>
-<p>Gestion des comptes Firebase et des rôles.</p>
-<p class="small">La création sécurisée des comptes utilisateurs doit être faite depuis Firebase Console ou via une Cloud Function avec privilèges serveur. Le navigateur ne doit jamais contenir la clé Admin SDK.</p>
-<div id="adminInfo"></div>
-</div></div>
-</section>
-</div>
-<script type="module" src="app.js"></script>
+<header><div class="container nav"><a class="brand" href="#accueil"><img src="assets/ubcp-logo.png" alt="Logo UBCP"><span>UNIVERSAL BUSINESS COMPANY PLUS<br>UBCP SARL</span></a><nav class="menu"><a href="#apropos">À propos</a><a href="#activites">Activités</a><a href="#departements">Départements</a><a href="#contact">Contact</a><a class="cta" href="security/">UBCP SECURITY</a></nav></div></header>
+<main>
+<section class="hero" id="accueil"><div class="container hero-grid"><div><span class="eyebrow">UBCP SARL • RDC — Afrique de l’Est</span><h1>Des solutions pour vos <span>projets</span>.</h1><p>Universal Business Company Plus accompagne les projets industriels, miniers et d’infrastructures à travers l’approvisionnement, la logistique et la fourniture d’équipements techniques.</p><div class="actions"><a class="btn primary" href="#activites">Découvrir nos activités</a><a class="btn outline" href="security/">Découvrir UBCP SECURITY</a></div></div><div class="hero-card"><img src="assets/ubcp-logo.png" alt="UBCP SARL"><h3>UNIVERSAL BUSINESS COMPANY PLUS</h3><p>Approvisionnement industriel • Logistique • Fourniture d’équipements techniques • Support aux projets miniers et d’infrastructures</p></div></div></section>
+<section class="about" id="apropos"><div class="container"><div class="section-head"><div class="kicker">À propos</div><h2>Une entreprise tournée vers les besoins industriels et miniers.</h2><p>UBCP SARL intervient dans l’approvisionnement industriel, la logistique, la fourniture d’équipements techniques et le support aux projets miniers et d’infrastructures.</p></div><div class="about-grid"><div class="about-card"><h3>Notre capacité</h3><p>UBCP peut mobiliser un réseau de fournisseurs pour différents matériels et équipements : forage, construction et génie civil, engins lourds, fournitures administratives et équipements de protection individuelle.</p><div class="facts"><div class="fact">🇨🇩 République Démocratique du Congo</div><div class="fact">🌍 Afrique de l’Est</div></div></div><div class="about-card"><h3>Logistique & approvisionnement</h3><p>Le réseau de fournisseurs techniques internationaux permet l’identification des équipements, la mobilisation de données techniques, la fourniture de fiches techniques, la transmission d’images et spécifications ainsi que la coordination logistique pour la livraison.</p></div></div></div></section>
+<section id="activites"><div class="container"><div class="section-head"><div class="kicker">Nos activités</div><h2>Des capacités adaptées aux projets professionnels.</h2><p>Une offre structurée autour des équipements, de la fourniture et de la logistique.</p></div><div class="cards">
+<div class="card"><div class="icon">⛏️</div><h3>Forage & exploration</h3><p>Tiges, tubes et casings, forets diamantés et tricônes, pompes à boue, compresseurs, fluides et additifs.</p></div>
+<div class="card"><div class="icon">🏗️</div><h3>Construction & génie civil</h3><p>Bétonnières, vibrateurs, groupes électrogènes, compacteurs, marteaux pneumatiques, coffrage et outillage.</p></div>
+<div class="card"><div class="icon">🚜</div><h3>Engins lourds</h3><p>Excavatrices, bulldozers, chargeuses, niveleuses, camions bennes, compacteurs lourds et mini-pelles.</p></div>
+<div class="card"><div class="icon">🖥️</div><h3>Fournitures administratives</h3><p>Ordinateurs professionnels, imprimantes, photocopieuses, mobilier, papeterie, salles de réunion et archivage.</p></div>
+<div class="card"><div class="icon">🦺</div><h3>Équipements de protection</h3><p>Casques, chaussures, gilets, gants, lunettes, masques, harnais et combinaisons de protection.</p></div>
+<div class="card"><div class="icon">🚚</div><h3>Logistique</h3><p>Importation directe, sourcing international, livraison par partenaires logistiques et coordination avec les plateformes minières.</p></div>
+</div></div></section>
+<section class="security" id="departements"><div class="container"><div class="section-head"><div class="kicker">Département</div><h2>UBCP SECURITY</h2><p>Un département de UBCP SARL dédié aux activités de sécurité et à leur gestion professionnelle.</p></div><div class="security-box"><div class="security-logo"><img src="security/assets/ubcp-security-logo.jpeg" alt="UBCP SECURITY"></div><div class="security-content"><h3>UBCP SECURITY</h3><p>Accédez à l'espace dédié au département : présentation, inscription des agents et espace de gestion sécurisé.</p><div class="security-list"><div>🛡️ Services de sécurité</div><div>👮 Gestion des agents</div><div>📋 Gestion des marchés</div><div>💰 Gestion de la caisse</div><div>💳 Paiements des agents</div><div>📊 Rapports & suivi</div></div><a class="btn primary" href="security/">Accéder à UBCP SECURITY</a></div></div></div></section>
+<section class="contact" id="contact"><div class="container"><div class="section-head"><div class="kicker">Contact</div><h2>Parlons de votre projet.</h2><p>Pour les demandes de fourniture, logistique et collaboration, contactez UBCP SARL.</p></div><div class="contact-grid"><div class="contact-item"><strong>Direction Générale</strong><a href="mailto:noenombe60@gmail.com">noenombe60@gmail.com</a></div><div class="contact-item"><strong>Contact institutionnel</strong><a href="mailto:ubcsarlcontact@gmail.com">ubcsarlcontact@gmail.com</a></div></div></div></section>
+</main>
+<footer><div class="container footer-grid"><div class="footer-brand"><img src="assets/ubcp-logo.png" alt="UBCP"><span>UNIVERSAL BUSINESS COMPANY PLUS — UBCP SARL</span></div><div class="small">© 2026 UBCP SARL. Tous droits réservés.</div></div></footer>
 </body></html>
